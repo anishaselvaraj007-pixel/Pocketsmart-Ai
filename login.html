@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - PocketSmart AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7ff, #e9e7ff);
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: white;
+            padding: 18px 6%;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #5146e5;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        /* LOGIN CARD */
+
+        .login-box {
+            width: 420px;
+            background: white;
+            padding: 42px;
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .login-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #f0efff;
+            border-radius: 50%;
+
+            font-size: 35px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0;
+            color: #222;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin: 10px 0 28px;
+            line-height: 1.5;
+        }
+
+        /* ERROR */
+
+        .error {
+            background: #fff0f0;
+            color: #c62828;
+            padding: 13px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            border: 1px solid #ffd2d2;
+        }
+
+        /* FORM */
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 15px;
+
+            border: 1px solid #ddd;
+            border-radius: 11px;
+
+            font-size: 15px;
+            background: #fafafa;
+
+            transition: 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #5146e5;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(81, 70, 229, 0.1);
+        }
+
+        /* LOGIN BUTTON */
+
+        button {
+            width: 100%;
+
+            margin-top: 27px;
+            padding: 14px;
+
+            border: none;
+            border-radius: 11px;
+
+            background: linear-gradient(135deg, #5146e5, #7168f5);
+
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 18px rgba(81, 70, 229, 0.25);
+        }
+
+        /* REGISTER */
+
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+
+            color: #666;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #5146e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                padding: 18px 25px;
+            }
+
+            .login-box {
+                width: 100%;
+                padding: 32px 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            🤖 PocketSmart AI
+        </div>
+
+    </div>
+
+
+    <!-- LOGIN CONTAINER -->
+
+    <div class="container">
+
+        <div class="login-box">
+
+            <!-- LOGIN ICON -->
+
+            <div class="login-icon">
+                🔐
+            </div>
+
+
+            <h1>
+                Welcome Back!
+            </h1>
+
+
+            <p class="subtitle">
+                Login to continue using your PocketSmart AI assistant.
+            </p>
+
+
+            <!-- ERROR MESSAGE -->
+
+            {% if error %}
+
+            <div class="error">
+                ❌ {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <!-- LOGIN FORM -->
+
+            <form action="/login" method="post">
+
+                <label for="email">
+                    📧 Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label for="password">
+                    🔒 Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <button type="submit">
+                    ✨ Login to PocketSmart
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER LINK -->
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <a href="/register">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

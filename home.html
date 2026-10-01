@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PocketSmart AI - Home Planner</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7ff, #e9e7ff);
+            color: #222;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: white;
+            padding: 18px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #5146e5;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #5146e5;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 45px auto;
+        }
+
+        /* BACK BUTTON */
+
+        .dashboard-btn {
+            display: inline-block;
+
+            margin-bottom: 22px;
+
+            padding: 12px 20px;
+
+            background: #5146e5;
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .dashboard-btn:hover {
+            background: #4035c5;
+            transform: translateY(-2px);
+        }
+
+        /* TITLE */
+
+        .page-title {
+            background: linear-gradient(
+                135deg,
+                #5146e5,
+                #766cff
+            );
+
+            color: white;
+
+            padding: 38px 30px;
+
+            border-radius: 22px;
+
+            text-align: center;
+
+            margin-bottom: 28px;
+
+            box-shadow:
+                0 10px 30px rgba(81, 70, 229, 0.25);
+        }
+
+        .home-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .page-title h1 {
+            margin: 0 0 12px;
+            font-size: 30px;
+        }
+
+        .page-title p {
+            margin: 0;
+            line-height: 1.6;
+            opacity: 0.92;
+        }
+
+        /* FORM */
+
+        .form-box {
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-heading h2 {
+            margin: 0 0 8px;
+        }
+
+        .form-heading p {
+            margin: 0;
+            color: #777;
+        }
+
+        label {
+            display: block;
+
+            margin-top: 20px;
+            margin-bottom: 8px;
+
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 11px;
+
+            font-size: 15px;
+
+            background: #fafafa;
+
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+
+            border-color: #5146e5;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(81, 70, 229, 0.1);
+        }
+
+        /* GENERATE BUTTON */
+
+        .generate-btn {
+            width: 100%;
+
+            margin-top: 30px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5146e5,
+                    #7168f5
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 18px rgba(81, 70, 229, 0.25);
+        }
+
+        /* TIP */
+
+        .tip {
+            margin-top: 22px;
+
+            padding: 15px;
+
+            background: #f0efff;
+
+            border-radius: 12px;
+
+            color: #5146e5;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 18px 25px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .page-title {
+                padding: 30px 20px;
+            }
+
+            .page-title h1 {
+                font-size: 25px;
+            }
+
+            .form-box {
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            🤖 PocketSmart AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                🏠 Home
+            </a>
+
+            <a href="/dashboard">
+                📊 Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <!-- BACK -->
+
+        <a href="/dashboard" class="dashboard-btn">
+            📊 Back to Dashboard
+        </a>
+
+
+        <!-- TITLE -->
+
+        <div class="page-title">
+
+            <div class="home-icon">
+                🏠
+            </div>
+
+            <h1>
+                Home Interior Planner
+            </h1>
+
+            <p>
+                Enter your budget and requirements to get
+                smart AI-powered home recommendations.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="form-box">
+
+            <div class="form-heading">
+
+                <h2>
+                    ✨ Tell Us What You Need
+                </h2>
+
+                <p>
+                    Our AI will create a budget-friendly recommendation.
+                </p>
+
+            </div>
+
+
+            <form action="/generate-home" method="post">
+
+
+                <!-- BUDGET -->
+
+                <label>
+                    💰 Your Budget (₹)
+                </label>
+
+                <input
+                    type="number"
+                    name="budget"
+                    placeholder="Example: 50000"
+                    min="1"
+                    required
+                >
+
+
+                <!-- ROOM -->
+
+                <label>
+                    🏠 Select Room
+                </label>
+
+                <select name="room">
+
+                    <option>Living Room</option>
+
+                    <option>Bedroom</option>
+
+                    <option>Kitchen</option>
+
+                    <option>Dining Room</option>
+
+                    <option>Multiple Rooms</option>
+
+                </select>
+
+
+                <!-- ITEM -->
+
+                <label>
+                    💡 What do you need?
+                </label>
+
+                <select name="item">
+
+                    <option>Lights</option>
+
+                    <option>Fans</option>
+
+                    <option>Dining Table</option>
+
+                    <option>Furniture</option>
+
+                    <option>Multiple Items</option>
+
+                </select>
+
+
+                <!-- QUANTITY -->
+
+                <label>
+                    🔢 Quantity
+                </label>
+
+                <input
+                    type="number"
+                    name="quantity"
+                    placeholder="Example: 2"
+                    min="1"
+                    required
+                >
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="generate-btn"
+                >
+                    ✨ Generate AI Recommendations
+                </button>
+
+
+            </form>
+
+
+            <div class="tip">
+                💡 Tip: Enter a realistic budget for more practical recommendations.
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

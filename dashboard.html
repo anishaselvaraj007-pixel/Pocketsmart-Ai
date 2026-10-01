@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - PocketSmart AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7ff, #eef0ff);
+            color: #222;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #5146e5;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #5146e5;
+        }
+
+        .logout {
+            color: #e53935 !important;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        /* WELCOME */
+
+        .welcome {
+            background: linear-gradient(135deg, #5146e5, #766cff);
+            color: white;
+            padding: 40px;
+            border-radius: 22px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(81, 70, 229, 0.25);
+        }
+
+        .welcome h1 {
+            margin: 0 0 12px;
+            font-size: 32px;
+        }
+
+        .welcome p {
+            margin: 0;
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .icon {
+            font-size: 55px;
+        }
+
+        .card h2 {
+            margin: 15px 0 10px;
+            color: #333;
+        }
+
+        .card p {
+            color: #777;
+            line-height: 1.6;
+            min-height: 50px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 24px;
+            background: #5146e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #3f35c7;
+            transform: scale(1.03);
+        }
+
+        /* ACTIVITY */
+
+        .section {
+            background: white;
+            margin-top: 35px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            text-align: center;
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 25px;
+        }
+
+        .section > p {
+            color: #777;
+        }
+
+        .activity-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .activity-card {
+            background: #f6f7ff;
+            padding: 25px;
+            border-radius: 16px;
+            transition: 0.3s;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            background: #eef0ff;
+        }
+
+        .activity-icon {
+            font-size: 38px;
+        }
+
+        .activity-card h3 {
+            margin: 10px 0 5px;
+        }
+
+        .count {
+            font-size: 28px;
+            font-weight: bold;
+            color: #5146e5;
+        }
+
+        .activity-card p {
+            color: #777;
+            margin-bottom: 0;
+        }
+
+        /* TOTAL */
+
+        .total-count {
+            margin-top: 25px;
+            padding: 22px;
+            background: linear-gradient(135deg, #f0efff, #f7f7ff);
+            border-radius: 15px;
+        }
+
+        .total-count h3 {
+            margin: 0 0 8px;
+        }
+
+        .total-number {
+            font-size: 35px;
+            font-weight: bold;
+            color: #5146e5;
+        }
+
+        /* HISTORY BUTTON */
+
+        .history-button {
+            margin-top: 25px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 18px 25px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .activity-container {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome {
+                padding: 30px 25px;
+            }
+
+            .welcome h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            🤖 PocketSmart AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                🏠 Home
+            </a>
+
+            <a href="/dashboard">
+                📊 Dashboard
+            </a>
+
+            <a href="/logout" class="logout">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <h1>
+                👋 Welcome to PocketSmart AI!
+            </h1>
+
+            <p>
+                Plan your budget smartly and get personalized AI recommendations.
+            </p>
+
+        </div>
+
+
+        <!-- MAIN FEATURES -->
+
+        <div class="cards">
+
+            <!-- HOME -->
+
+            <div class="card">
+
+                <div class="icon">🏠</div>
+
+                <h2>Home Interior</h2>
+
+                <p>
+                    Plan your home interior according to your budget and requirements.
+                </p>
+
+                <a href="/home" class="btn">
+                    Start Planning
+                </a>
+
+            </div>
+
+
+            <!-- PARTY -->
+
+            <div class="card">
+
+                <div class="icon">🎉</div>
+
+                <h2>Party Planner</h2>
+
+                <p>
+                    Create a smart party plan based on your budget, guests and event.
+                </p>
+
+                <a href="/party" class="btn">
+                    Plan Party
+                </a>
+
+            </div>
+
+
+            <!-- JEWELRY -->
+
+            <div class="card">
+
+                <div class="icon">💎</div>
+
+                <h2>Jewelry</h2>
+
+                <p>
+                    Get jewelry recommendations based on your occasion and personal style.
+                </p>
+
+                <a href="/jewelry" class="btn">
+                    Find Jewelry
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIVITY -->
+
+        <div class="section">
+
+            <h2>📊 Your Activity</h2>
+
+            <p>
+                Track your PocketSmart AI recommendations.
+            </p>
+
+
+            <div class="activity-container">
+
+                <!-- HOME -->
+
+                <div class="activity-card">
+
+                    <div class="activity-icon">🏠</div>
+
+                    <h3>Home</h3>
+
+                    <div class="count">
+                        {{ home_count }}
+                    </div>
+
+                    <p>Recommendations</p>
+
+                </div>
+
+
+                <!-- PARTY -->
+
+                <div class="activity-card">
+
+                    <div class="activity-icon">🎉</div>
+
+                    <h3>Party</h3>
+
+                    <div class="count">
+                        {{ party_count }}
+                    </div>
+
+                    <p>Recommendations</p>
+
+                </div>
+
+
+                <!-- JEWELRY -->
+
+                <div class="activity-card">
+
+                    <div class="activity-icon">💎</div>
+
+                    <h3>Jewelry</h3>
+
+                    <div class="count">
+                        {{ jewelry_count }}
+                    </div>
+
+                    <p>Recommendations</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL -->
+
+            <div class="total-count">
+
+                <h3>
+                    📋 Total Recommendations
+                </h3>
+
+                <div class="total-number">
+                    {{ total }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HISTORY -->
+
+        <div class="section">
+
+            <h2>📋 Recommendation History</h2>
+
+            <p>
+                View your previous AI recommendations and budget plans.
+            </p>
+
+            <div class="history-button">
+
+                <a href="/history" class="btn">
+                    View History
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
